@@ -1,8 +1,9 @@
 import { GetStaticProps } from 'next';
 import React from 'react';
 import Header from '../../components/Header';
-import { sanityClient, urlFor } from '../../sanity'
+import { sanityClient, urlFor } from '../../sanity';
 import { Post } from '../../typings';
+import PortableText from 'react-portable-text';
 
 interface Props {
     post: Post
@@ -29,7 +30,33 @@ const Post = ({ post }: Props) => {
                     </p>
                 </div>
 
-                
+                <div className='mt-10'>
+                    <PortableText 
+                        content={post.body}
+                        projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
+                        dataset={process.env.NEXT_PUBLIC_SANITY_DATASET} 
+                        serializers={
+                            {
+                                h1: (props: any) => (
+                                    <h1 className='text-2xl font-bold my-5' {...props}/>
+                                ),
+                                h2: (props: any) => (
+                                    <h1 className='text-xl font-bold my-5' {...props}/>
+                                ),
+                                h4: (props: any) => (
+                                    <h1 className='text-l font-bold my-3' {...props}/>
+                                ),
+                                li: ({ children }: any) => (
+                                    <li className='ml-4 list-disc'>{children}</li>
+                                ),
+                                link: ({ href, children }: any) => (
+                                    <a href={href} className='text-blue-500 hover:underline'>
+                                        {children}
+                                    </a>
+                                ),
+                            }
+                        }/>
+                </div>
             </article>
         </main>
     );
