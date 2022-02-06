@@ -8,12 +8,30 @@ interface Props {
     post: Post
 }
 
-const Post = ({post}: Props) => {
-    console.log(post)
+const Post = ({ post }: Props) => {
     return (
-      <main>
-          <Header/>
-      </main>
+        <main>
+            <Header />
+            <img
+                className='w-full h-40 object-cover'
+                src={urlFor(post.mainImage).url()!} 
+                alt="" 
+            />
+
+            <article className='max-w-3xl mx-auto p-5'>
+                <h1 className='text-3xl mt-10 mb-3'>{post.title}</h1>
+                <h2 className='text-xl font-light text-gray-500 mb-2'>{post.description}</h2>
+
+                <div className='flex items-center space-x-2'>
+                    <img className='h-10 w-10 rounded-full' src={urlFor(post.author.image).url()!} alt="" />
+                    <p className='font-extralight text-sm'>
+                        Blog post by <span className='text-green-500'>{post.author.name}</span> - Published at {new Date(post.publishedAt).toLocaleString()}
+                    </p>
+                </div>
+
+                
+            </article>
+        </main>
     );
 };
 
@@ -43,7 +61,7 @@ export const getStaticPaths = async () => {
     }
 }
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
     const query = `*[_type == "post" && slug.current == $slug][0]{
         _id,
         _createdAt,
