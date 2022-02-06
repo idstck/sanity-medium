@@ -75,6 +75,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     return {
         props: {
             post,
-        }
+        },
+        revalidate: 60 //after 60 seconds, it'll update the old cached version of pages
     }
 }
