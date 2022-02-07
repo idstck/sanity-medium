@@ -4,7 +4,7 @@ import React from 'react';
 function Header() {
     return (
         <header className='flex justify-between p-5 max-w-7xl mx-auto'>
-            <div className='flex items-center space-x-5'>
+            <div className='flex items-center space-x-5 cursor-pointer'>
                 <Link href="/">
                     <img 
                         className='w-44 object-contain'
