@@ -13,11 +13,6 @@ const Post = ({ post }: Props) => {
     return (
         <main>
             <Header />
-            <img
-                className='w-full h-40 object-cover'
-                src={urlFor(post.mainImage).url()!} 
-                alt="" 
-            />
 
             <article className='max-w-3xl mx-auto p-5'>
                 <h1 className='text-3xl mt-10 mb-3'>{post.title}</h1>
@@ -29,6 +24,12 @@ const Post = ({ post }: Props) => {
                         Blog post by <span className='text-green-500'>{post.author.name}</span> - Published at {new Date(post.publishedAt).toLocaleString()}
                     </p>
                 </div>
+
+                <img
+                    className='w-full h-50 object-cover py-5'
+                    src={urlFor(post.mainImage).url()!} 
+                    alt="" 
+                />
 
                 <div className='mt-10'>
                     <PortableText 
